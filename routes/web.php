@@ -8,7 +8,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuideController;
 
-
 // 🔥 LOGIN & REGISTER (user BELUM login)
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -32,7 +31,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/{log}/edit', [HabitLogBladeController::class, 'edit'])->name('edit');
         Route::put('/{log}', [HabitLogBladeController::class, 'update'])->name('update');
         Route::delete('/{log}', [HabitLogBladeController::class, 'destroy'])->name('destroy');
-
     });
 
     // Habits
@@ -45,9 +43,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{habit}', [HabitBladeController::class, 'destroy'])->name('destroy');
     });
 
-    // Habit Categories (opsional)
+    // Habit Categories
     Route::prefix('categories')->name('categories.')->group(function () {
-        Route::get('/', [HabitCategoryBladeController::class, 'index'])->name('index');
+        Route::get('/categories/index', [HabitCategoryBladeController::class, 'index'])->name('categories.index');
         Route::get('/create', [HabitCategoryBladeController::class, 'create'])->name('create');
         Route::post('/', [HabitCategoryBladeController::class, 'store'])->name('store');
         Route::get('/{category}/edit', [HabitCategoryBladeController::class, 'edit'])->name('edit');
@@ -55,10 +53,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{category}', [HabitCategoryBladeController::class, 'destroy'])->name('destroy');
     });
 
-
+    // Guide
     Route::get('/guide', function () {
         return view('guide');
     })->name('guide');
-    
-
 });

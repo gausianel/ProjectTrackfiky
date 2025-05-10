@@ -13,6 +13,7 @@ class HabitBladeController extends Controller
 {
     public function index()
     {
+
         $habits = Habit::where('user_id', Auth::user()->id)->get();
         return view('habits.index', compact('habits'));
     }
